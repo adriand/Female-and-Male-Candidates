@@ -1,0 +1,88 @@
+body {
+  font: 13px/18px Helvetica, Arial, sans-serif;
+  margin: 0px;
+  padding: 0px;
+  background-color: #393939;
+  color: white; }
+
+* {
+  margin: 0px;
+  padding: 0px; }
+
+p, h1, h2, h3 {
+  margin-bottom: 15px; }
+
+.spacer {
+  clear: both;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: 0;
+  width: 0; }
+
+a {
+  color: #338833;
+  font-weight: bold;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: underline; }
+  a:visited {
+    color: #338833; }
+  a img {
+    border: 0px; }
+
+#header {
+  margin: 0px;
+  padding: 40px 0px 10px;
+  color: white; }
+  #header a, #header a:hover, #header a:visited {
+    color: white;
+    font-size: 48px;
+    text-decoration: none; }
+
+#content {
+  background: white;
+  color: #333333;
+  padding: 30px;
+  margin: 0px;
+  font-size: 15px;
+  line-height: 18px; }
+
+#footer {
+  font-size: 10px;
+  line-height: 10px;
+  margin: 0px;
+  padding: 40px 0px 50px;
+  color: black; }
+
+#container {
+  margin: 0px auto;
+  padding: 0px;
+  width: 980px; }
+
+h1 {
+  font-size: 30px;
+  line-height: 48px;
+  margin: 0px 0px 20px;
+  padding: 0px;
+  font-weight: bold; }
+
+h2 {
+  font-size: 24px;
+  line-height: 24px;
+  margin: 0px;
+  padding: 0px 0px 15px;
+  font-weight: normal; }
+
+table { border-collapse: collapse; }
+table tr td, table tr th { padding: 0px; margin: 0px; }
+table tr th { text-align: left; width: 160px; }
+table tr td { width: 110px; }
+table tr.high td { height: 70px; }
+table tr.med td { height: 30px; }
+table tr td { text-align: center; }
+table tr td.sym { font-size: 36px; }
+table tr.dates td { font-weight: bold; padding-bottom: 15px; }
+table tr.dates td, table tr.positions td { font-size: 12px; }
+
+#details { display: none; }
