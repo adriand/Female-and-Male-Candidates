@@ -21,13 +21,13 @@ p, h1, h2, h3 {
   width: 0; }
 
 a {
-  color: #338833;
+  color: #5131C9;
   font-weight: bold;
   text-decoration: none; }
   a:hover {
     text-decoration: underline; }
   a:visited {
-    color: #338833; }
+    color: #5131C9; }
   a img {
     border: 0px; }
 
@@ -51,6 +51,7 @@ a {
 #wards .ward {
   float: left;
   padding-top: 50px;
+  width: 305px;
 }
 
 #footer {

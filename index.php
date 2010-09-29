@@ -95,8 +95,13 @@
       <div id='header'><h1>Gender of Candidates in Hamilton's 2010 Municipal Election</h1></div>
       <div id='content'>
         
-        <h2>All Candidates</h2>
+        <p>
+          This project utilizes the excellent resources and API of the <a href="http://elections.raisethehammer.org/">Raise the Hammer Elections website</a>.
+          The source is open and available on <a href="http://github.com/adriand/Female-and-Male-Candidates">GitHub</a>.
+        </p>
+        <br /><br />
         
+        <h2>All Candidates</h2>
         
         <div id="all_candidates_chart" style="float: left;"></div>
                 
