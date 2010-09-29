@@ -119,7 +119,7 @@
       </div>
       <div id='footer'> 
         <p>
-          Copyright &copy; 2010 Raise the Hammer
+          Copyright &copy; 2010 Raise the Hammer. <a href="http://github.com/adriand/Female-and-Male-Candidates">Get the source (it's open!)</a>
         </p> 
       </div>
     </div>
