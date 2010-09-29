@@ -1,5 +1,16 @@
-Unknown Genders:
-----------------
+This is a very simple demonstration of how to access the Raise the Hammer Elections API (http://elections.raisethehammer.org/apidoc).
+
+The three most important files are:
+
+api.php: this allows us to bypass Javascript's cross-domain request policy by doing the cross-domain request with PHP instead.
+
+index.htm: the page where things are displayed.
+
+public/application.js: this is where all of the interesting stuff happens and where the work gets done.
+
+
+Unknown Genders
+---------------
 
 Pat Ielasi
 
