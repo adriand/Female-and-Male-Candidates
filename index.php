@@ -19,46 +19,55 @@
     <script src='public/jquery.js' type='text/javascript'></script>
     <script src='public/jquery.corner.js' type='text/javascript'></script> 
     <script src='public/jgcharts.pack.js' type='text/javascript'></script> 
-  	<script type="text/javascript" src="public/fancybox/jquery.fancybox-1.3.1.js"></script>
-  	<link rel="stylesheet" type="text/css" href="public/fancybox/jquery.fancybox-1.3.1.css" media="screen" />
   	
     <script type="text/javascript">
+      function getGenderCount(candidates) {
+        female_count = 0; male_count = 0; transgendered_count = 0;
+        for (i = 0; i < candidates.length; i++) {
+          switch (candidates[i].gender) {
+            case "Female":
+              female_count++;
+              break;
+            case "Male":
+              male_count++;
+              break;
+            case "Transgendered":
+              transgendered_count++;
+              break;
+          }
+        } 
+        return { females: female_count, males: male_count, trans: transgendered_count };
+      }
+      
+      function renderChart(container) {
+        api = new jGCharts.Api();
+        $('<img>')
+          .attr('src', api.make({
+            data: [female_count, male_count],
+            axis_labels: ['F (' + female_count + ')', 'M (' + male_count + ')'],
+            type: 'p'
+          })).appendTo(container);      
+      }
+      
     	$(function() {
         $('#content').corner("12px");        
         $(".fancy").fancybox();
         
         $.getJSON("?api=/election/1", function(data) {
           candidates = data.candidates;
-          female_count = 0; male_count = 0; transgendered_count = 0;
-          
-          for (i = 0; i < candidates.length; i++) {
-            switch (candidates[i].gender) {
-              case "Female":
-                female_count++;
-                break;
-              case "Male":
-                male_count++;
-                break;
-              case "Transgendered":
-                transgendered_count++;
-                break;
-            }
-          }
+          count = getGenderCount(candidates);
           
           $("#total_candidates_count").html(candidates.length);
-          $("#female_count").html(female_count);
-          $("#male_count").html(male_count);
-          $("#transgendered_count").html(transgendered_count);
+          $("#female_count").html(count.females);
+          $("#male_count").html(count.males);
+          $("#transgendered_count").html(count.trans);
           
-          api = new jGCharts.Api();
+          renderChart("#all_candidates_chart");
           
-          $('<img>')
-            .attr('src', api.make({
-              data: [female_count, male_count],
-              axis_labels: ['Female', 'Male'],
-              type: 'p'
-            })).appendTo("#all_candidates_chart");
-          
+          wards = data.wards;
+          for (i = 0; i < wards.length; i++) {
+            $("#wards").append("<h3>" + wards[i].ward + "</h3>");
+          }
         });
     	});
     </script> 
@@ -78,6 +87,8 @@
         </table>
         
         <div id="all_candidates_chart"></div>
+        
+        <div id="wards"></div>
         
       </div>
       <div id='footer'> 
