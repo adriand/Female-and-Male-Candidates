@@ -51,7 +51,6 @@
       
     	$(function() {
         $('#content').corner("12px");        
-        $(".fancy").fancybox();
         
         $.getJSON("?api=/election/1", function(data) {
           candidates = data.candidates;
