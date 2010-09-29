@@ -49,14 +49,14 @@
         return candidates_in_ward;
       }
       
-      function renderChart(container, female_count, male_count) {
+      function createChart(female_count, male_count) {
         api = new jGCharts.Api();
-        $('<img>')
-          .attr('src', api.make({
-            data: [female_count, male_count],
-            axis_labels: ['F (' + female_count + ')', 'M (' + male_count + ')'],
-            type: 'p'
-          })).appendTo(container);      
+        return  $('<img>')
+                .attr('src', api.make({
+                  data: [female_count, male_count],
+                  axis_labels: ['F (' + female_count + ')', 'M (' + male_count + ')'],
+                  type: 'p'
+                }));
       }
       
     	$(function() {
@@ -71,15 +71,21 @@
           $("#male_count").html(count.males);
           $("#transgendered_count").html(count.trans);
           
-          renderChart("#all_candidates_chart", count.females, count.males);
+          $("#all_candidates_chart").append(createChart(count.females, count.males));
           
           wards = data.wards;
           for (ward_index = 0; ward_index < wards.length; ward_index++) {
+            // figure out who the candidates are in the ward and build the counts for them
             candidates_in_ward = getCandidatesInWard(candidates, wards[ward_index].ward);
-            $("#wards").append("<h3>" + wards[ward_index].ward + "</h3>");
             ward_count = getGenderCount(candidates_in_ward);
-            renderChart("#wards", ward_count.females, ward_count.males);
+            // render a div with the ward title and chart in it for each of the wards
+            $("#wards").append(
+              $("<div class='ward'></div>")
+                .append("<h3>" + wards[ward_index].ward + "</h3>")
+                .append(createChart(ward_count.females, ward_count.males))
+            );
           }
+          $("#wards").append($("<div class='spacer'></div>"));
         });
     	});
     </script> 
@@ -91,15 +97,21 @@
         
         <h2>All Candidates</h2>
         
-        <table>
-          <tr><th>Total Candidates</th><td id="total_candidates_count"></td></tr>
-          <tr><th>Female</th><td id="female_count"></td></tr>
-          <tr><th>Male</th><td id="male_count"></td></tr>
-          <tr><th>Transgendered</th><td id="transgendered_count"></td></tr>
-        </table>
         
-        <div id="all_candidates_chart"></div>
+        <div id="all_candidates_chart" style="float: left;"></div>
+                
+        <div style="float: left; padding-top: 50px; margin-left: 30px;">
+          <table>
+            <tr><th>Total Candidates</th><td id="total_candidates_count"></td></tr>
+            <tr><th>Female</th><td id="female_count"></td></tr>
+            <tr><th>Male</th><td id="male_count"></td></tr>
+            <tr><th>Transgendered</th><td id="transgendered_count"></td></tr>
+          </table>
+        </div>
         
+        <div class="spacer"></div>
+        
+        <br /><br />
         <h2>By Wards</h2>
         
         <div id="wards"></div>
@@ -107,7 +119,7 @@
       </div>
       <div id='footer'> 
         <p>
-          
+          Copyright &copy; 2010 Raise the Hammer
         </p> 
       </div>
     </div>

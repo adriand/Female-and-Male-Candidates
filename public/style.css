@@ -47,6 +47,11 @@ a {
   margin: 0px;
   font-size: 15px;
   line-height: 18px; }
+  
+#wards .ward {
+  float: left;
+  padding-top: 50px;
+}
 
 #footer {
   font-size: 10px;
