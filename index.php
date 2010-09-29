@@ -39,7 +39,17 @@
         return { females: female_count, males: male_count, trans: transgendered_count };
       }
       
-      function renderChart(container) {
+      function getCandidatesInWard(candidates, ward) {
+        candidates_in_ward = [];
+        for (i = 0; i < candidates.length; i++) {
+          if (candidates[i].ward == ward) {
+            candidates_in_ward.push(candidates[i]);
+          }
+        }
+        return candidates_in_ward;
+      }
+      
+      function renderChart(container, female_count, male_count) {
         api = new jGCharts.Api();
         $('<img>')
           .attr('src', api.make({
@@ -61,11 +71,14 @@
           $("#male_count").html(count.males);
           $("#transgendered_count").html(count.trans);
           
-          renderChart("#all_candidates_chart");
+          renderChart("#all_candidates_chart", count.females, count.males);
           
           wards = data.wards;
-          for (i = 0; i < wards.length; i++) {
-            $("#wards").append("<h3>" + wards[i].ward + "</h3>");
+          for (ward_index = 0; ward_index < wards.length; ward_index++) {
+            candidates_in_ward = getCandidatesInWard(candidates, wards[ward_index].ward);
+            $("#wards").append("<h3>" + wards[ward_index].ward + "</h3>");
+            ward_count = getGenderCount(candidates_in_ward);
+            renderChart("#wards", ward_count.females, ward_count.males);
           }
         });
     	});
@@ -86,6 +99,8 @@
         </table>
         
         <div id="all_candidates_chart"></div>
+        
+        <h2>By Wards</h2>
         
         <div id="wards"></div>
         
