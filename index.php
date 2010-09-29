@@ -22,7 +22,7 @@
   	
     <script type="text/javascript">
       function getGenderCount(candidates) {
-        female_count = 0; male_count = 0; transgendered_count = 0;
+        var female_count = 0; var male_count = 0; var transgendered_count = 0;
         for (i = 0; i < candidates.length; i++) {
           switch (candidates[i].gender) {
             case "Female":
@@ -40,7 +40,7 @@
       }
       
       function getCandidatesInWard(candidates, ward) {
-        candidates_in_ward = [];
+        var candidates_in_ward = [];
         for (i = 0; i < candidates.length; i++) {
           if (candidates[i].ward == ward) {
             candidates_in_ward.push(candidates[i]);
@@ -50,7 +50,7 @@
       }
       
       function createChart(female_count, male_count) {
-        api = new jGCharts.Api();
+        var api = new jGCharts.Api();
         return  $('<img>')
                 .attr('src', api.make({
                   data: [female_count, male_count],
@@ -63,8 +63,8 @@
         $('#content').corner("12px");        
         
         $.getJSON("?api=/election/1", function(data) {
-          candidates = data.candidates;
-          count = getGenderCount(candidates);
+          var candidates = data.candidates;
+          var count = getGenderCount(candidates);
           
           $("#total_candidates_count").html(candidates.length);
           $("#female_count").html(count.females);
@@ -73,11 +73,11 @@
           
           $("#all_candidates_chart").append(createChart(count.females, count.males));
           
-          wards = data.wards;
+          var wards = data.wards;
           for (ward_index = 0; ward_index < wards.length; ward_index++) {
             // figure out who the candidates are in the ward and build the counts for them
-            candidates_in_ward = getCandidatesInWard(candidates, wards[ward_index].ward);
-            ward_count = getGenderCount(candidates_in_ward);
+            var candidates_in_ward = getCandidatesInWard(candidates, wards[ward_index].ward);
+            var ward_count = getGenderCount(candidates_in_ward);
             // render a div with the ward title and chart in it for each of the wards
             $("#wards").append(
               $("<div class='ward'></div>")
