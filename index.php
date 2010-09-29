@@ -27,11 +27,27 @@
         $(".fancy").fancybox();
         
         $.getJSON("?api=/election/1", function(data) {
-          var candidates = data.candidates;
+          candidates = data.candidates;
+          female_count = 0; male_count = 0; transgendered_count = 0;
           
           for (i = 0; i < candidates.length; i++) {
-            console.log(candidates[i].ward);
+            switch (candidates[i].gender) {
+              case "Female":
+                female_count++;
+                break;
+              case "Male":
+                male_count++;
+                break;
+              case "Transgendered":
+                transgendered_count++;
+                break;
+            }
           }
+          
+          $("#total_candidates_count").html(candidates.length);
+          $("#female_count").html(female_count);
+          $("#male_count").html(male_count);
+          $("#transgendered_count").html(transgendered_count);
           
         });
     	});
