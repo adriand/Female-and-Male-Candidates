@@ -18,6 +18,7 @@
     <link charset='utf-8' href='public/style.css' media='screen' rel='stylesheet' title='no title' type='text/css' /> 
     <script src='public/jquery.js' type='text/javascript'></script>
     <script src='public/jquery.corner.js' type='text/javascript'></script> 
+    <script src='public/jgcharts.pack.js' type='text/javascript'></script> 
   	<script type="text/javascript" src="public/fancybox/jquery.fancybox-1.3.1.js"></script>
   	<link rel="stylesheet" type="text/css" href="public/fancybox/jquery.fancybox-1.3.1.css" media="screen" />
   	
@@ -49,6 +50,15 @@
           $("#male_count").html(male_count);
           $("#transgendered_count").html(transgendered_count);
           
+          api = new jGCharts.Api();
+          
+          $('<img>')
+            .attr('src', api.make({
+              data: [female_count, male_count],
+              axis_labels: ['Female', 'Male'],
+              type: 'p'
+            })).appendTo("#all_candidates_chart");
+          
         });
     	});
     </script> 
@@ -66,6 +76,8 @@
           <tr><th>Male</th><td id="male_count"></td></tr>
           <tr><th>Transgendered</th><td id="transgendered_count"></td></tr>
         </table>
+        
+        <div id="all_candidates_chart"></div>
         
       </div>
       <div id='footer'> 
